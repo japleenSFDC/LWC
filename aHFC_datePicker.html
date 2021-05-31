@@ -1,0 +1,74 @@
+<template>
+  <div>
+    <div
+        aria-hidden="false"
+        aria-label="Date picker: June"
+        class="slds-datepicker ahfc-datepicker"
+        role="dialog"
+      >
+        <div class="slds-datepicker__filter slds-grid">
+          <div
+            class="slds-datepicker__filter_month slds-grid slds-grid_align-spread "
+          >
+            <div class="slds-align-middle">
+              <button
+                class="slds-button"
+                onclick={handlePreviousMonth}
+              >
+                <lightning-icon class="calendar-icons" icon-name="utility:chevronleft" size="small" alternative-text="Previous Month" title="Previous Month"></lightning-icon>
+              </button>
+            </div>
+            <h2
+              aria-atomic="true"
+              aria-live="assertive"
+              class="slds-align-middle month-text"
+              id="defaulPicker-month"
+            >
+              {currentMonthText}
+            </h2>
+            <div class="slds-align-middle">
+              <button
+                class="slds-button"
+                onclick={handleNextMonth}
+              >
+                  <lightning-icon class="calendar-icons" icon-name="utility:chevronright" size="small" alternative-text="Next Month" title="Next Month"></lightning-icon>
+              
+              </button>
+            </div>
+          </div>
+          <div class="year-selection">
+            <label class="current-year">{value}</label>
+            <lightning-button-menu alternative-text="Show menu" variant="container" class="year-select-icon" size="medium">
+              <template for:each={options} for:item="year">
+                <lightning-menu-item key={year.value} value={year.value} label={year.label} ></lightning-menu-item>
+              </template>
+            </lightning-button-menu>
+          </div>
+        </div>
+        <div class="datePicker">
+        <ul class="header datePicker-days">
+          <template for:each={weekdays} for:item="weekday" >
+            <li key={weekday} class="ahfc-caption-text">{weekday}</li>
+          </template>
+        </ul>
+        <ul class="datePickerHolder">
+            <template for:each={dates} for:item="date" >
+                <li key={date.key}
+                    class={date.className}
+                    data-id = {date.formatted}
+                    value={date.formatted}
+                    onclick = {handleDateClick}
+                >
+                    {date.text}
+                </li>
+            </template>
+        </ul>
+        </div>
+        <div class="todays-label">
+        <button class="slds-button slds-align_absolute-center slds-text-link" onclick={jumpToToday}>
+          Today
+        </button>
+      </div>
+  </div>
+  </div>
+</template>
